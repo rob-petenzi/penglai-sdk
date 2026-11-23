@@ -7,7 +7,7 @@ SDK_LIB_DIR = $(PENGLAI_SDK)/lib
 MUSL_LIB_DIR = $(PENGLAI_SDK)/musl/lib
 MUSL_LIBC = $(MUSL_LIB_DIR)/libc.a
 SDK_APP_LIB = $(SDK_LIB_DIR)/libpenglai-enclave-eapp.a
-GCC_LIB = $(SDK_LIB_DIR)/libgcc.a
+GCC_LIB = $(shell $(CC) -march=rv64imac -mabi=lp64 -print-libgcc-file-name)
 SDK_INCLUDE_DIR = $(SDK_LIB_DIR)/app/include
 
 LDFLAGS = -static -L$(SDK_LIB_DIR) -L$(MUSL_LIB_DIR) -lpenglai-enclave-eapp -lc
