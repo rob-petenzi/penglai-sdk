@@ -5,17 +5,21 @@ SECTIONS
   . = 0x00001000;
   .text : {
     *(.text._start)
-    *(.text)
+    *(.text .text.*)
   }
   . = ALIGN(0x1000);
   .rodata : 
   { 
     *(.rdata)
-    *(.rodata)
+    *(.rodata .rodata.* .srodata .srodata.*)
   }
+  . = ALIGN(0x1000);
   .data : { 
-	*(.data) 
-	*(.bss)
+	*(.data .data.* .sdata .sdata.*)
+  }
+  . = ALIGN(0x1000);
+  .bss : {
+	*(.bss .bss.* .sbss .sbss.* COMMON)
   }
   .debug : { *(.debug) }
 
